@@ -1,4 +1,4 @@
-ARG ROS_DISTRO=humble
+ARG ROS_DISTRO=jazzy
 ARG PREFIX=
 
 FROM ros:$ROS_DISTRO-ros-base AS pkg-builder
