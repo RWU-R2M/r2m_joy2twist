@@ -20,17 +20,23 @@ RUN apt update -y && apt upgrade -y &&  \
     apt clean && \
     rm -rf /var/lib/apt/lists/*
 
-FROM husarnet/ros:${PREFIX}${ROS_DISTRO}-ros-core
+# Create the final image
+FROM ros:$ROS_DISTRO-ros-base
 
 # select bash as default shell
 SHELL ["/bin/bash", "-c"]
+
+WORKDIR /ros2_ws
 
 RUN apt update && apt install -y \
         ros-$ROS_DISTRO-joy-linux && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+# Copy from the build stage
 COPY --from=pkg-builder /ros2_ws /ros2_ws
 
-RUN echo $(cat /ros2_ws/src/joy2twist/package.xml | grep '<version>' | sed -r 's/.*<version>([0-9]+.[0-9]+.[0-9]+)<\/version>/\1/g') > /version.txt
+# Add setup files to entrypoint
+RUN echo "source /ros2_ws/install/setup.bash" >> /ros_entrypoint.sh
 
+RUN echo $(cat /ros2_ws/src/joy2twist/package.xml | grep '<version>' | sed -r 's/.*<version>([0-9]+.[0-9]+.[0-9]+)<\/version>/\1/g') > /version.txt
