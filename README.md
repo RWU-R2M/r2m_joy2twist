@@ -1,6 +1,6 @@
 # R2M joy2twist
 
-Quick and dirty fork of [joy2twist](https://github.com/husarion/joy2twist) package for use on [RWU Rover to Mars](https://github.com/RWU-R2M) project.
+Quick and dirty fork of [joy2twist](https://github.com/husarion/joy2twist) package for use on [RWU Rover to Mars](https://github.com/RWU-R2M) project. The images are now packed with ROS2 Jazzy, and built for amd64 and arm64
 
 # Joy2Twist
 
